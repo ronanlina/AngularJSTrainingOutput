@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
+import {StudentwService} from './services/student/studentw.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  
+
   public myId: string = "myAngularId";
   public myValue: string = "inputVal";
   //public isSuccess: boolean = true;
@@ -19,13 +22,24 @@ export class AppComponent {
 
   public inputValue: string= "uniqueId";
   public isSuccess: boolean = false;
-  public studentList: any = [];
+  //public studentList: any = [];
 
   public dateObject = new Observable<string>((subs: Subscriber<string>)=>{
       setInterval(()=>{subs.next(new Date().toString() );}, 1000);
   });
 
   public keyword: String;
+  public orderCol = 'fname';
+
+  public studentList = [];
+
+  constructor(public studentService: StudentwService){
+
+  }
+
+  ngOnInit(){
+    this.studentList = this.studentService.getStudentList();
+  }
   public login = {
       success: this.isSuccess,
       error: false
@@ -52,6 +66,7 @@ export class AppComponent {
     newData = Object.assign({}, this.student);
 
     this.studentList.push( newData );
+    this.studentService.addStudentList( newData );
 
     for(let stud in this.student){
       this.student[stud] = '';

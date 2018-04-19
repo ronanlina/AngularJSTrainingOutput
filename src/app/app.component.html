@@ -42,43 +42,56 @@
       <label for="fname">
           <input id="lname"  type="text" name="lname" [(ngModel)]="student.lname"></label>
           <br>
-      <button (click)="addStudent()"  ng-disabled="continueAdd()">ADD</button>
-      <button class="btn btn-lg btn-secondary" (click)="newStudent()">NEW</button>
+
+
+        <table >
+          <tr>
+            <td><button (click)="addStudent()"  ng-disabled="continueAdd()">ADD</button>      
+              <div [ngSwitch]="edit">
+                <td><button *ngSwitchCase="false" class="btn btn-sm btn-block btn-primary" (click)="addStudent()" ng-disabled="continueAdd()">add</button></td>
+                <td><button *ngSwitchCase="true" class="btn btn-sm btn-block btn-primary" (click)="clear()" ng-disabled="continueAdd()">new</button></td>
+              </div>
+            </td>
+          </tr>
+        </table>
 
       <div class="col-sm-9">
-        <div [ngSwitch]="edit">
-            <button *ngSwitchCase="false" class="btn btn lg btn-primary" (click)="addStudent()" ng-disabled="continueAdd()">add</button>
-          <button *ngSwitchCase="true" class="btn btn lg btn-primary" (click)="clear()" ng-disabled="continueAdd()">new</button>
-        </div>
           <table>
+            
               <thead>
                   <th scope="col">#</th>
                   <th scope="col">first</th>
                   <th scope="col">middle</th>
                   <th scope="col">last</th>
               </thead>
+              
               <tbody>
-                <tr *ngFor="let studentData of studentList | searchPipe: keyword; let i = index" class="pointer" (click)="getStudent(studentData)">
-                    <td>{{ i+1 }}</td>
-                    <td>{{ studentData.fname }}</td>
-                    <td>{{ studentData.mname }}</td>
-                    <td>{{ studentData.lname }}</td>
-                    <td><button class="btn btn-sm btn-danger" (click)="removeEntry(i)">REMOVE</button></td>
-                </tr>
+                  <tr *ngFor="let studentData of studentList | searchPipe: keyword | orderBy: orderCol : sort; let i = index" class="pointer" (click)="getStudent(studentData)">
+                      <td>{{ i+1 }}</td>
+                      <td>{{ studentData.fname }}</td>
+                      <td>{{ studentData.mname }}</td>
+                      <td>{{ studentData.lname }}</td>
+                      <td><button class="btn btn-sm btn-danger" (click)="removeEntry(i)">REMOVE</button></td>
+                  </tr>
               </tbody>
             </table>
-            
       </div>
-
-      <h2></h2>
-        
     </div>
   </div>
 </div>
+
+
+<div class="containter col-sm-12-md-7 col-lg-8">
+    <div class="form-group">
+      <label for="search">Search</label>
+      <input type="text" class="form-control" class="form-control" id="search" [(ngModel)]="keyword">
+    </div>
+  </div>
 
 <div class="row">
   <div class="col-sm-12">
     <label for="dateToday">Date:</label>
     <input type="text" id="dateToday" [value]="dateObject | async | date: 'mediumTime'" disabled>
   </div>
+  
 </div>
