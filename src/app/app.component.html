@@ -1,20 +1,84 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!--<input type="text" [id]="myId" placeholder="Enter Id" [value]="myValue">
 
+<h1 [class.text-green]="isSuccess">Success!</h1>
+
+<p [style.color]="colorGreen">My color is {{ colorGreen }}</p>
+
+<input type="text" (keyup)="alertNow($event.target)">
+
+<button class="btn btn-primary" (click)="alertNow(input)">CLICK ME</button>
+<p>{{   alert }}</p>
+
+<div *ngIf="show; else elseBlock">SHOW ME</div>
+<ng-template #elseBlock>It's hidden</ng-template>
+
+<label for="inputStudent">Enter Student Name</label>
+<input id="inputStudent" type="text" #student>
+<button (click)="addStudent(student)">ADD</button>
+
+<div>
+  <ol>
+    <li *ngFor="let student of students">
+      {{ student }}
+    <button (click)="removeEntry(i)" class="btn-danger">REMOVE</button>
+  </li>
+
+  </ol>
+</div> -->
+
+
+<div class="col-sm-12">
+  <div class="card">
+    <div class="card-header">
+      <p>Class Binding</p>
+    </div>
+    <div class="card-body">
+        <label for="fname">
+            <input id="fname"  type="text" name="fname" [(ngModel)]="student.fname" (keyup)="isValid($event.target.value)"></label>
+          <br>
+        <label for="fname">
+          <input id="mname"  type="text" name="mname" [(ngModel)]="student.mname"></label>
+          <br>
+      <label for="fname">
+          <input id="lname"  type="text" name="lname" [(ngModel)]="student.lname"></label>
+          <br>
+      <button (click)="addStudent()"  ng-disabled="continueAdd()">ADD</button>
+      <button class="btn btn-lg btn-secondary" (click)="newStudent()">NEW</button>
+
+      <div class="col-sm-9">
+        <div [ngSwitch]="edit">
+            <button *ngSwitchCase="false" class="btn btn lg btn-primary" (click)="addStudent()" ng-disabled="continueAdd()">add</button>
+          <button *ngSwitchCase="true" class="btn btn lg btn-primary" (click)="clear()" ng-disabled="continueAdd()">new</button>
+        </div>
+          <table>
+              <thead>
+                  <th scope="col">#</th>
+                  <th scope="col">first</th>
+                  <th scope="col">middle</th>
+                  <th scope="col">last</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let studentData of studentList | searchPipe: keyword; let i = index" class="pointer" (click)="getStudent(studentData)">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ studentData.fname }}</td>
+                    <td>{{ studentData.mname }}</td>
+                    <td>{{ studentData.lname }}</td>
+                    <td><button class="btn btn-sm btn-danger" (click)="removeEntry(i)">REMOVE</button></td>
+                </tr>
+              </tbody>
+            </table>
+            
+      </div>
+
+      <h2></h2>
+        
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <label for="dateToday">Date:</label>
+    <input type="text" id="dateToday" [value]="dateObject | async | date: 'mediumTime'" disabled>
+  </div>
+</div>
