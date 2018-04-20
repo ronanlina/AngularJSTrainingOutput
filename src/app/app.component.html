@@ -27,71 +27,43 @@
 </div> -->
 
 
-<div class="col-sm-12">
-  <div class="card">
-    <div class="card-header">
-      <p>Class Binding</p>
-    </div>
-    <div class="card-body">
-        <label for="fname">
-            <input id="fname"  type="text" name="fname" [(ngModel)]="student.fname" (keyup)="isValid($event.target.value)"></label>
-          <br>
-        <label for="fname">
-          <input id="mname"  type="text" name="mname" [(ngModel)]="student.mname"></label>
-          <br>
-      <label for="fname">
-          <input id="lname"  type="text" name="lname" [(ngModel)]="student.lname"></label>
-          <br>
-
-
-        <table >
-          <tr>
-            <td><button (click)="addStudent()"  ng-disabled="continueAdd()">ADD</button>      
-              <div [ngSwitch]="edit">
-                <td><button *ngSwitchCase="false" class="btn btn-sm btn-block btn-primary" (click)="addStudent()" ng-disabled="continueAdd()">add</button></td>
-                <td><button *ngSwitchCase="true" class="btn btn-sm btn-block btn-primary" (click)="clear()" ng-disabled="continueAdd()">new</button></td>
-              </div>
-            </td>
-          </tr>
-        </table>
-
-      <div class="col-sm-9">
-          <table>
-            
-              <thead>
-                  <th scope="col">#</th>
-                  <th scope="col">first</th>
-                  <th scope="col">middle</th>
-                  <th scope="col">last</th>
-              </thead>
-              
-              <tbody>
-                  <tr *ngFor="let studentData of studentList | searchPipe: keyword | orderBy: orderCol : sort; let i = index" class="pointer" (click)="getStudent(studentData)">
-                      <td>{{ i+1 }}</td>
-                      <td>{{ studentData.fname }}</td>
-                      <td>{{ studentData.mname }}</td>
-                      <td>{{ studentData.lname }}</td>
-                      <td><button class="btn btn-sm btn-danger" (click)="removeEntry(i)">REMOVE</button></td>
-                  </tr>
-              </tbody>
-            </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="containter col-sm-12-md-7 col-lg-8">
-    <div class="form-group">
-      <label for="search">Search</label>
-      <input type="text" class="form-control" class="form-control" id="search" [(ngModel)]="keyword">
-    </div>
-  </div>
-
+<!--
 <div class="row">
   <div class="col-sm-12">
     <label for="dateToday">Date:</label>
     <input type="text" id="dateToday" [value]="dateObject | async | date: 'mediumTime'" disabled>
   </div>
   
-</div>
+</div>-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink="subject">Subjects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink="student">Student</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Disabled</a>
+      </li>
+      <li>
+         <label for="search">Search</label>
+      </li>
+      <li>
+        <input type="text" class="form-control" class="form-control" id="search" [(ngModel)]="keyword">
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+

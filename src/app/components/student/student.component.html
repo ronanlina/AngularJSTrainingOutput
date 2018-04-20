@@ -1,0 +1,84 @@
+<!--<input type="text" [id]="myId" placeholder="Enter Id" [value]="myValue">
+
+<h1 [class.text-green]="isSuccess">Success!</h1>
+
+<p [style.color]="colorGreen">My color is {{ colorGreen }}</p>
+
+<input type="text" (keyup)="alertNow($event.target)">
+
+<button class="btn btn-primary" (click)="alertNow(input)">CLICK ME</button>
+<p>{{   alert }}</p>
+
+<div *ngIf="show; else elseBlock">SHOW ME</div>
+<ng-template #elseBlock>It's hidden</ng-template>
+
+<label for="inputStudent">Enter Student Name</label>
+<input id="inputStudent" type="text" #student>
+<button (click)="addStudent(student)">ADD</button>
+
+<div>
+  <ol>
+    <li *ngFor="let student of students">
+      {{ student }}
+    <button (click)="removeEntry(i)" class="btn-danger">REMOVE</button>
+  </li>
+
+  </ol>
+</div> -->
+
+<div class="col-sm-12">
+  <div class="card">
+    <div class="card-header">
+      <p>Class Binding</p>
+    </div>
+    <div class="card-body">
+        <label for="fname">
+            <input id="fname"  type="text" name="fname" [(ngModel)]="student.fname" (keyup)="isValid($event.target.value)"></label>
+          <br>
+        <label for="fname">
+          <input id="mname"  type="text" name="mname" [(ngModel)]="student.mname"></label>
+          <br>
+      <label for="fname">
+          <input id="lname"  type="text" name="lname" [(ngModel)]="student.lname"></label>
+          <br>
+
+          
+        <table >
+          <tr>
+            <td><button (click)="addStudent()"  ng-disabled="continueAdd()">ADD</button>      
+              <div [ngSwitch]="edit">
+                <td><button *ngSwitchCase="false" class="btn btn-sm btn-block btn-primary" (click)="addStudent()" ng-disabled="continueAdd()">add</button></td>
+                <td><button *ngSwitchCase="true" class="btn btn-sm btn-block btn-primary" (click)="clear()" ng-disabled="continueAdd()">new</button></td>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+      <div class="col-sm-9">
+          <table>
+            
+              <thead>
+                  <th scope="col">#</th>
+                  <th scope="col">first</th>
+                  <th scope="col">middle</th>
+                  <th scope="col">last</th>
+              </thead>
+              
+              <tbody>
+                  <tr *ngFor="let studentData of studentList | searchPipe: keyword | orderBy: orderCol : sort; let i = index" class="pointer" (click)="getStudent(studentData)">
+                      <td>{{ i+1 }}</td>
+                      <td>{{ studentData.fname }}</td>
+                      <td>{{ studentData.mname }}</td>
+                      <td>{{ studentData.lname }}</td>
+                      <td><button class="btn btn-sm btn-danger" (click)="removeEntry(i)">REMOVE</button></td>
+                      <td><button class="btn btn-sm btn-primary" (click)="removeEntry(i)">REMOVE</button></td>
+                  </tr>
+              </tbody>
+            </table>
+            
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-student-details></app-student-details>

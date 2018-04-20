@@ -8,17 +8,25 @@ import { OrderModule } from 'ngx-order-pipe';
 
 import { StudentwService } from './services/student/studentw.service';
 import { SubjectFormComponent } from './components/subjects/subject-form/subject-form.component';
+import { HomeComponent } from './components/home/home.component';
+import { AppRoutingModule } from './app-routing.module';
+import { StudentComponent } from './components/student/student.component';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchPipePipe,
-    SubjectFormComponent
+    SubjectFormComponent,
+    HomeComponent,
+    StudentComponent,
+    StudentDetailsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    OrderModule
+    OrderModule,
+    AppRoutingModule
   ],
   providers: [StudentwService],
   bootstrap: [AppComponent]
